@@ -330,23 +330,6 @@ jobs:
           FASTLANE_KEY: ${{ secrets.FASTLANE_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
-      # Start Fastlane troubleshoot
-      - name: Check for APP_STORE_CONNECT_API_KEY
-        run: |
-          if [[ -z "${{ secrets.APP_STORE_CONNECT_API_KEY }}" ]]; then
-            echo "❌ Secret is missing"
-            exit 1
-          else
-            echo "✅ Secret is available"
-          fi
-      
-      - name: Show fastlane directory
-        run: ls -la fastlane
-      
-      - name: Show api_key.json contents
-        run: cat fastlane/api_key.json || echo "❌ API key file missing"
-      # End troubleshoot
-
       # Upload to TestFlight
       - name: Fastlane upload to TestFlight
         run: bundle exec fastlane release
